@@ -1,20 +1,20 @@
 #include "shell.h"
 
 /**
- * _strlen - get string length
- * @str: parameter
- * Return: len
+ * _strlen - returns string length
+ * @s: parameter
+ * Return: result
 */
 /* BY CHARIFA MASBAHI & NORA JEOUT*/
 
-size_t _strlen(const char *str)
+size_t _strlen(const char *s)
 {
 	size_t len = 0;
 
-	while (*str != '\0')
+	while (*s != '\0')
 	{
 		len++;
-		str++;
+		s++;
 	}
 	return (len);
 }

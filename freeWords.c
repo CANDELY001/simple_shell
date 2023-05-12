@@ -2,25 +2,24 @@
 
 /**
  * free_words - Frees a list of words.
- * @words: Pointer to an array of strings.
+ * @s: Pointer to an array of strings.
  * @n: Number of words in the array.
- * This function frees each individual string in the array using the
- * free() function and finally frees the array itself using free().
  */
-  /* BY CHARIFA MASBAHI & NORA JEOUT*/
-void free_words(char **words, int n)
+/* BY CHARIFA MASBAHI & NORA JEOUT*/
+void free_words(char **s, int n)
 {
 	int i;
 
-	if (words == NULL)
+	if (!s)
 		return;
-	for (i = 0; i < n; i++)
+	while (i < n)
 	{
-		if (words[i] != NULL)
+		if (s[i])
 		{
-			free(words[i]);
-			words[i] = NULL;
+			free(s[i]);
+			s[i] = NULL;
 		}
+		i++;
 	}
-	free(words);
+	free(s);
 }

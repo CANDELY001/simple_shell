@@ -1,48 +1,48 @@
 #include "shell.h"
 
 /**
- * intToString - int to a str
- * @num: integer
+ * intToString - convert int to a str
+ * @n: integer
  * Return: string
  */
- /* BY CHARIFA MASBAHI & NORA JEOUT*/
-char *intToString(int num)
+/* BY CHARIFA MASBAHI & NORA JEOUT*/
+char *intToString(int n)
 {
-	int neg_num = 0, digCntr = 0, tmp, i = 0, j = 0;
-	char *str;
+	int negative = 0, c = 0, tmp, i = 0, j = 0;
+	char *s;
 
 	if (num < 0)
 	{
-		neg_num = 1;
-		num *= -1;
-		digCntr++;
+		negative = 1;
+		n *= -1;
+		c++;
 	}
-	tmp = num;
+	tmp = n;
 	while (tmp > 0)
 	{
-		digCntr++;
+		c++;
 		tmp /= 10;
 	}
-	str = (char *) malloc(sizeof(char) * (digCntr + 1));
+	s = (char *) malloc(sizeof(char) * (c + 1));
 	do {
-		str[i++] = (num % 10) + '0';
-		num /= 10;
-	} while (num);
-	if (neg_num)
+		s[i++] = (n % 10) + '0';
+		n /= 10;
+	} while (n);
+	if (negative)
 	{
-		str[i++] = '-';
+		s[i++] = '-';
 	}
 	j = i - 1;
 	i = 0;
 	while (i < j)
 	{
-		char tmp = str[i];
+		char tmp = s[i];
 
-		str[i] = str[j];
-		str[j] = tmp;
+		s[i] = s[j];
+		s[j] = tmp;
 		i++;
 		j--;
 	}
-	str[digCntr] = '\0';
-	return (str);
+	s[c] = '\0';
+	return (s);
 }

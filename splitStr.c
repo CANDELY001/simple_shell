@@ -2,52 +2,50 @@
 
 /**
  * split_string - splits a string into an array of words
- * @str: the str to be splited
- * @str_separator: the delimeter
- * @num_of_words: number of words in the str
+ * @s: the str to be splited
+ * @separator: the delimeter
+ * @n: number of words in the str
  * Return: the array of string or NULL
 */
 /* BY CHARIFA MASBAHI & NORA JEOUT*/
-char **split_string(char *str, const char *str_separator, int *num_of_words)
+char **split_string(char *s, const char *separator, int *n)
 {
-	char *str_copy = NULL, *word = NULL, **arr_of_words;
+	char *s_copy = NULL, *word = NULL, **words;
 	int i;
 
-	str_copy = malloc(sizeof(char) * _strlen(str) + 1);
-	if (str_copy == NULL)
+	s_copy = malloc(sizeof(char) * _strlen(s) + 1);
+	if (!s_copy)
 	{
 		perror("Allocation Failed !");
 		return (NULL);
 	}
-	_strcpy(str_copy, str);
-
-	*num_of_words = 0;
-	word = strtok(str, str_separator);
-	while (word != NULL)
+	_strcpy(s_copy, s);
+	*n = 0;
+	word = strtok(s, separator);
+	while (word)
 	{
-		(*num_of_words)++;
-		word = strtok(NULL, str_separator);
+		(*n)++;
+		word = strtok(NULL, separator);
 	}
-	arr_of_words = malloc(sizeof(char *) * (*num_of_words + 1));
-	if (arr_of_words == NULL)
+	words = malloc(sizeof(char *) * (*n + 1));
+	if (words == NULL)
 	{
 		perror("Allocation Failed !");
 		return (NULL);
 	}
-	word = strtok(str_copy, str_separator);
+	word = strtok(s_copy, separator);
 	for (i = 0; word != NULL; i++)
 	{
-		arr_of_words[i] = malloc(sizeof(char) * _strlen(word) + 1);
-		if (arr_of_words[i] == NULL)
+		words[i] = malloc(sizeof(char) * _strlen(word) + 1);
+		if (words[i] == NULL)
 		{
 			perror("Allocation Failed !");
 			return (NULL);
 		}
-		_strcpy(arr_of_words[i], word);
-		word = strtok(NULL, str_separator);
+		_strcpy(words[i], word);
+		word = strtok(NULL, separator);
 	}
-
-	arr_of_words[i] = NULL;
-	free(str_copy);
-	return (arr_of_words);
+	words[i] = NULL;
+	free(s_copy);
+	return (words);
 }

@@ -17,6 +17,5 @@ char *_strdup(const char *s)
 			duplicat[i] = s[i];
 		duplicat[len] = '\0';
 	}
-
 	return (duplicat);
 }

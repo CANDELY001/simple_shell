@@ -2,13 +2,9 @@
 
 /**
  * read_input - Reads a line of input from stdin.
- * This function prompts the user to enter input, reads a line of input
- * from stdin using the getline() function, and returns a pointer to the
- * input string.
  * Return: A pointer to the input string, or NULL on error or empty line.
  */
 /* BY CHARIFA MASBAHI & NORA JEOUT*/
-
 char *read_input()
 {
 	char *input_h = NULL;
@@ -17,7 +13,6 @@ char *read_input()
 
 	fflush(stdout);
 	total_read = getline(&input_h, &alloc_size, stdin);
-
 	if (total_read == -1)
 	{
 		free(input_h);

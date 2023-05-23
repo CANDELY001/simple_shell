@@ -1,7 +1,6 @@
 #include "shell.h"
 /**
  * display_aliases - func that display the all aliases
- * Return: void
  */
 void display_aliases(void)
 {
@@ -35,20 +34,17 @@ const char *get_alias(const char *alias_name)
 	}
 	return (NULL);
 }
-
 /**
  * exec_alias - execute alias commands
  * @args: array of words
- * Return: nothing
  */
 void exec_alias(char **args)
 {
 	if (_strcmp(args[0], "alias") == 0)
 	{
 		if (args[1] == NULL)
-		{
 			display_aliases();
-		} else
+		else
 		{
 			int i = 1;
 
@@ -66,21 +62,16 @@ void exec_alias(char **args)
 					alias_name[equals_sign - arg] = '\0';
 					strcpy(alias_value, equals_sign + 1);
 					if (add_alias(alias_name, alias_value) == 0)
-					{
 						return;
-					}
 				} else
 				{
 					const char *alias_name = args[i];
 					const char *alias_value = get_alias(alias_name);
 
 					if (alias_value != NULL)
-					{
 						printf("%s=%s\n", alias_name, alias_value);
-					} else
-					{
+					else
 						printf("Alias '%s' not found.\n", alias_name);
-					}
 				}
 				i++;
 			}
@@ -94,9 +85,7 @@ void exec_alias(char **args)
 			const char *alias_name = args[i];
 
 			if (!unset_alias(alias_name))
-			{
 				printf("Alias '%s' not found.\n", alias_name);
-			}
 			i++;
 		}
 	}

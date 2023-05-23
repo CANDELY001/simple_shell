@@ -3,10 +3,9 @@
  * exec_multi_cmds - Execute multiple commands separated by semicolons
  * @prompt: The user input string containing the commands
  * @sh_name: program name
- * @cnt: cmonad count
+ * @cnt: parameter
  * Return: error code
  */
-/* BY CHARIFA MASBAHI & NORA JEOUT*/
 int exec_multi_cmds(char *prompt, char *sh_name, int cnt)
 {
 	int num_of_cmds, num_of_words, i, ex_code;
@@ -14,21 +13,16 @@ int exec_multi_cmds(char *prompt, char *sh_name, int cnt)
 
 	arr_of_cmds = split_string(prompt, ";", &num_of_cmds);
 	if (strstr(prompt, ";") != NULL)
-	{
 		arr_of_cmds = split_string(prompt, ";", &num_of_cmds);
-	} else if (strstr(prompt, "&&") != NULL)
-	{
+	else if (strstr(prompt, "&&") != NULL)
 		arr_of_cmds = split_string(prompt, "&&", &num_of_cmds);
-	} else if (strstr(prompt, "||") != NULL)
-	{
+	else if (strstr(prompt, "||") != NULL)
 		arr_of_cmds = split_string(prompt, "||", &num_of_cmds);
-	}
 	if (arr_of_cmds == NULL)
 	{
 		printf("Error splitting user input\n");
 		return (errno);
 	}
-
 	for (i = 0; i < num_of_cmds; i++)
 	{
 		arr_of_words = split_string(arr_of_cmds[i], " \t\r\n", &num_of_words);

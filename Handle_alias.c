@@ -143,3 +143,38 @@ void insert_existing_aliases(void)
 		}
 	}
 }
+/**
+ * display_aliases - func that display the all aliases
+ */
+void display_aliases(void)
+{
+        if (alias_count > 0)
+        {
+                int i;
+
+                printf("Current aliases:\n");
+                for (i = 0; i < alias_count; i++)
+                {
+                        printf("%s=%s\n", aliases[i].name, aliases[i].value);
+                }
+        } else
+        {
+                printf("No aliases defined.\n");
+        }
+}
+/**
+ * get_alias - get the value of a given alias
+ * @alias_name: alias name
+ * Return: result
+ */
+const char *get_alias(const char *alias_name)
+{
+        for (int i = 0; i < alias_count; i++)
+        {
+                if (strcmp(aliases[i].name, alias_name) == 0)
+                {
+                        return (aliases[i].value);
+                }
+        }
+        return (NULL);
+}

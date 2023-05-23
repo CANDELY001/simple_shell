@@ -11,7 +11,7 @@ char *intToString(int n)
 	int negative = 0, c = 0, tmp, i = 0, j = 0;
 	char *s;
 
-	if (num < 0)
+	if (n < 0)
 	{
 		negative = 1;
 		n *= -1;

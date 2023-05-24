@@ -3,10 +3,10 @@
 /**
  * exec_alias_helper - execute alias commands helper
  * @args: array of words
- * @aliases: list
- * @alias_count: parameter
+ * @alias_count: alias count
+ * @aliases: list of aliases
  */
-void exec_alias_helper(char **args, int alias_count, Alias aliases)
+void exec_alias_helper(char **args, int alias_count, Alias *aliases)
 {
 	int i = 1;
 
@@ -19,6 +19,7 @@ void exec_alias_helper(char **args, int alias_count, Alias aliases)
 		i++;
 	}
 }
+
 /**
  * exec_alias - execute alias commands
  * @args: array of words
@@ -28,10 +29,11 @@ void exec_alias(char **args)
 	Alias aliases[MAX_ALIASES];
 	int alias_count = 0, i = 1;
 
+	insert_existing_aliases(alias_count, aliases);
 	if (_strcmp(args[0], "alias") == 0)
 	{
 		if (args[1] == NULL)
-			display_aliases();
+			display_aliases(alias_count, aliases);
 		else
 		{
 			while (args[i] != NULL)
@@ -63,14 +65,14 @@ void exec_alias(char **args)
 			}
 		}
 	} else if (_strcmp(args[0], "unalias") == 0)
-		exec_alias_helper(args);
+		exec_alias_helper(args, alias_count, aliases);
 }
 /**
- * display_aliases - func that display the all aliases
- * @aliases: list
- * @alias_count: parameter
+ * display_aliases - func that display all aliases
+ * @alias_count: alias count
+ * @aliases: list of aliases
  */
-void display_aliases(int alias_count, Alias aliases)
+void display_aliases(int alias_count, Alias *aliases)
 {
 	if (alias_count > 0)
 	{
@@ -81,19 +83,21 @@ void display_aliases(int alias_count, Alias aliases)
 		{
 			printf("%s=%s\n", aliases[i].name, aliases[i].value);
 		}
-	} else
+	}
+	else
 	{
 		printf("No aliases defined.\n");
 	}
 }
+
 /**
  * get_alias - get the value of a given alias
  * @alias_name: alias name
- * @aliases: list
- * @alias_count: parameter
+ * @alias_count: alias count
+ * @aliases: list of aliases
  * Return: result
  */
-const char *get_alias(const char *alias_name, int alias_count, Alias aliases)
+const char *get_alias(const char *alias_name, int alias_count, Alias *aliases)
 {
 	for (int i = 0; i < alias_count; i++)
 	{

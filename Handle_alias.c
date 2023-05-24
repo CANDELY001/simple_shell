@@ -1,4 +1,3 @@
-
 #include "shell.h"
 /**
  * save_alias - save the alias
@@ -23,17 +22,17 @@ int save_alias(const char *alias_name, const char *alias_value)
  * add_alias - add new alias
  * @n: name
  * @v: value
- * @aliases: list
- * @alias_count: parameter
+ * @alias_count: alias count
+ * @aliases: list of aliases
  * Return: 1 (Success) 0 (failed)
  */
-int add_alias(const char *n, const char *v, int alias_count, Alias aliases)
+int add_alias(const char *n, const char *v, int alias_count, Alias *aliases)
 {
 	if (alias_count < MAX_ALIASES)
 	{
 		for (int i = 0; i < alias_count; i++)
 		{
-			if (strcmp(aliases[i].name, n) == 0)
+			if (_strcmp(aliases[i].name, n) == 0)
 			{
 				_strcpy(aliases[i].value, v);
 				save_alias(n, v);
@@ -45,7 +44,8 @@ int add_alias(const char *n, const char *v, int alias_count, Alias aliases)
 		alias_count++;
 		save_alias(n, v);
 		return (1);
-	} else if (alias_count >= MAX_ALIASES)
+	}
+	else if (alias_count >= MAX_ALIASES)
 	{
 		printf("Maximum number of aliases exceeded.\n");
 		return (0);
@@ -55,26 +55,26 @@ int add_alias(const char *n, const char *v, int alias_count, Alias aliases)
 /**
  * delete_alias - delete alias
  * @alias_name: name
- * @aliases: list
- * @alias_count: parameter
+ * @alias_count: alias count
+ * @aliases: list of aliases
  * Return: result
  */
-int delete_alias(const char *alias_name, int alias_count, Alias aliases)
+int delete_alias(const char *alias_name, int alias_count, Alias *aliases)
 {
 	for (int i = 0; i < alias_count; i++)
 	{
-		if (strcmp(aliases[i].name, alias_name) == 0)
+		if (_strcmp(aliases[i].name, alias_name) == 0)
 		{
 			for (int j = i; j < alias_count - 1; j++)
 			{
-				strcpy(aliases[j].name, aliases[j + 1].name);
-				strcpy(aliases[j].value, aliases[j + 1].value);
+				_strcpy(aliases[j].name, aliases[j + 1].name);
+				_strcpy(aliases[j].value, aliases[j + 1].value);
 			}
 			alias_count--;
 			char env_name[MAX_ALIAS_NAME_LENGTH + 7] = "ALIAS_";
 
 			strcat(env_name, alias_name);
-			unsetenv(env_name);
+			_unsetenv(env_name);
 			return (1);
 		}
 	}
@@ -85,15 +85,15 @@ int delete_alias(const char *alias_name, int alias_count, Alias aliases)
 /**
  * unset_alias - unset alias
  * @alias_name: name
- * @aliases: list
- * @alias_count: parameter
+ * @alias_count: alias count
+ * @aliases: list of aliases
  * Return: result
  */
-int unset_alias(const char *alias_name, int alias_count, Alias aliases)
+int unset_alias(const char *alias_name, int alias_count, Alias *aliases)
 {
 	for (int i = 0; i < alias_count; i++)
 	{
-		if (strcmp(aliases[i].name, alias_name) == 0)
+		if (_strcmp(aliases[i].name, alias_name) == 0)
 		{
 			for (int j = i; j < alias_count - 1; j++)
 			{
@@ -114,15 +114,15 @@ int unset_alias(const char *alias_name, int alias_count, Alias aliases)
 	printf("Alias '%s' not found.\n", alias_name);
 	return (0);
 }
+
 /**
  * insert_existing_aliases - fill the list alias with aliases from env
- * @aliases: list
- * @alias_count: parameter
+ * @alias_count: alias count
+ * @aliases: list of aliases
  */
-void insert_existing_aliases(int alias_count, Alias aliases)
+void insert_existing_aliases(int alias_count, Alias *aliases)
 {
 	alias_count = 0;
-
 	for (int i = 0; environ[i] != NULL; i++)
 	{
 		char *env_var = environ[i];
@@ -139,10 +139,11 @@ void insert_existing_aliases(int alias_count, Alias aliases)
 
 				if (alias_count < MAX_ALIASES)
 				{
-					strncpy(aliases[alias_count].name, alias_name, MAX_ALIAS_NAME_LENGTH);
-					strncpy(aliases[alias_count].value, alias_value, MAX_ALIAS_VALUE_LENGTH);
+					_strncpy(aliases[alias_count].name, alias_name, MAX_ALIAS_NAME_LENGTH);
+					_strncpy(aliases[alias_count].value, alias_value, MAX_ALIAS_VALUE_LENGTH);
 					alias_count++;
-				} else
+				}
+				else
 				{
 					printf("Maximum number of aliases exceeded.\n");
 					break;
@@ -151,3 +152,4 @@ void insert_existing_aliases(int alias_count, Alias aliases)
 		}
 	}
 }
+

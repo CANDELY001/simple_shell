@@ -11,12 +11,10 @@ int handle_multi_cmds_Helper(char **arr)
 
 	if (_strcmp(cmd, "alias") == 0)
 	{
-		insert_existing_aliases();
 		exec_alias(arr);
 		return (1);
 	} else if (_strcmp(cmd, "unalias") == 0)
 	{
-		insert_existing_aliases();
 		exec_alias(arr);
 		return (1);
 	} else if (_strcmp(cmd, "simple_shell") == 0)

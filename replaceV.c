@@ -81,8 +81,6 @@ void replace_env_v(char *word, const char *var, const char *value, char *pos)
 		_strncpy(new_word, word, pos - word);
 		new_word[pos - word] = '\0';
 		_strcat(new_word, env_value);
-		_strcat(new_word, pos + _strlen(var));
-
 		free(word);
 		word = new_word;
 	}

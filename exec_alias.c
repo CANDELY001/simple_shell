@@ -3,20 +3,20 @@
  * exec_alias_helper - execute alias commands helper
  * @args: array of words
  */
- void exec_alias_helper(char **args)
- {
-     int i = 1;
+void exec_alias_helper(char **args)
+{
+	int i = 1;
 
-		while (args[i] != NULL)
-		{
-			const char *alias_name = args[i];
+	while (args[i] != NULL)
+	{
+		const char *alias_name = args[i];
 
-			if (!unset_alias(alias_name))
-				printf("Alias '%s' not found.\n", alias_name);
-			i++;
-		}
- }
- /**
+		if (!unset_alias(alias_name))
+			printf("Alias '%s' not found.\n", alias_name);
+		i++;
+	}
+}
+/**
  * exec_alias - execute alias commands
  * @args: array of words
  */
@@ -68,19 +68,19 @@ void exec_alias(char **args)
  */
 void display_aliases(void)
 {
-        if (alias_count > 0)
-        {
-                int i;
+	if (alias_count > 0)
+	{
+		int i;
 
-                printf("Current aliases:\n");
-                for (i = 0; i < alias_count; i++)
-                {
-                        printf("%s=%s\n", aliases[i].name, aliases[i].value);
-                }
-        } else
-        {
-                printf("No aliases defined.\n");
-        }
+		printf("Current aliases:\n");
+		for (i = 0; i < alias_count; i++)
+		{
+			printf("%s=%s\n", aliases[i].name, aliases[i].value);
+		}
+	} else
+	{
+		printf("No aliases defined.\n");
+	}
 }
 /**
  * get_alias - get the value of a given alias
@@ -89,12 +89,12 @@ void display_aliases(void)
  */
 const char *get_alias(const char *alias_name)
 {
-        for (int i = 0; i < alias_count; i++)
-        {
-                if (_strcmp(aliases[i].name, alias_name) == 0)
-                {
-                        return (aliases[i].value);
-                }
-        }
-        return (NULL);
+	for (int i = 0; i < alias_count; i++)
+	{
+		if (_strcmp(aliases[i].name, alias_name) == 0)
+		{
+			return (aliases[i].value);
+		}
+	}
+	return (NULL);
 }

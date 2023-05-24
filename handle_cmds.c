@@ -17,7 +17,7 @@ int handle_multi_cmds_Helper(char **arr)
 	} else if (_strcmp(cmd, "unalias") == 0)
 	{
 		insert_existing_aliases();
-		exec_unalias(arr);
+		exec_alias(arr);
 		return (1);
 	} else if (_strcmp(cmd, "simple_shell") == 0)
 	{

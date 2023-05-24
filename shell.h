@@ -92,14 +92,14 @@ int _unsetenv(const char *name);
 void handle_cd(char **arr_words);
 
 /**handle alias*/
-void insert_existing_aliases(void);
+void insert_existing_aliases(int alias_count, Alias aliases);
 int save_alias(const char *alias_name, const char *alias_value);
-int add_alias(const char *alias_name, const char *alias_value);
-int delete_alias(const char *alias_name);
-int unset_alias(const char *alias_name);
+int add_alias(const char *n, const char *v, int alias_count, Alias aliases);
+int delete_alias(const char *alias_name, int alias_count, Alias aliases);
+int unset_alias(const char *alias_name, int alias_count, Alias aliases);
 void exec_alias(char **args);
-void display_aliases(void);
-const char *get_alias(const char *alias_name);
+void display_aliases(int alias_count, Alias aliases);
+const char *get_alias(const char *alias_name, int alias_count, Alias aliases);
 
 /**Handle $$/ $?*/
 void replace_variable(char **arr_words, const char *var, const char *value);

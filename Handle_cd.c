@@ -21,29 +21,21 @@ void handle_cd(char **arr_words)
 			isError("OLDPWD not set");
 			return;
 		}
-	}
-	else
-	{
+	} else
 		initial_directory = (char *)arr_words[1];
-	}
-
 	the_old_pwd = handle_cwd();
 	if (the_old_pwd == NULL)
 		return;
-
 	if (_setenv("OLDPWD", the_old_pwd, 1) < 0)
 	{
 		free(the_old_pwd);
 		return;
 	}
 	free(the_old_pwd);
-
 	switch_current_dir(initial_directory);
-
 	the_curr_pwd = handle_cwd();
 	if (the_curr_pwd == NULL)
 		return;
-
 	if (_setenv("PWD", the_curr_pwd, 1) < 0)
 	{
 		free(the_curr_pwd);

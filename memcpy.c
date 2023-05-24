@@ -16,7 +16,7 @@ void *_memcpy(void *dest, const void *src, size_t n)
 
 	while (index < n)
 	{
-		destt[idx] = srcc[index];
+		destt[index] = srcc[index];
 		index++;
 	}
 	return (dest);

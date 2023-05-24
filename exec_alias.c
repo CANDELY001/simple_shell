@@ -1,9 +1,12 @@
 #include "shell.h"
+
 /**
  * exec_alias_helper - execute alias commands helper
  * @args: array of words
+ * @aliases: list
+ * @alias_count: parameter
  */
-void exec_alias_helper(char **args)
+void exec_alias_helper(char **args, int alias_count, Alias aliases)
 {
 	int i = 1;
 
@@ -11,7 +14,7 @@ void exec_alias_helper(char **args)
 	{
 		const char *alias_name = args[i];
 
-		if (!unset_alias(alias_name))
+		if (!unset_alias(alias_name, alias_count, aliases))
 			printf("Alias '%s' not found.\n", alias_name);
 		i++;
 	}
@@ -22,14 +25,15 @@ void exec_alias_helper(char **args)
  */
 void exec_alias(char **args)
 {
+	Alias aliases[MAX_ALIASES];
+	int alias_count = 0, i = 1;
+
 	if (_strcmp(args[0], "alias") == 0)
 	{
 		if (args[1] == NULL)
 			display_aliases();
 		else
 		{
-			int i = 1;
-
 			while (args[i] != NULL)
 			{
 				const char *arg = args[i];
@@ -43,12 +47,12 @@ void exec_alias(char **args)
 					strncpy(alias_name, arg, equals_sign - arg);
 					alias_name[equals_sign - arg] = '\0';
 					strcpy(alias_value, equals_sign + 1);
-					if (add_alias(alias_name, alias_value) == 0)
+					if (add_alias(alias_name, alias_value, alias_count, aliases) == 0)
 						return;
 				} else
 				{
 					const char *alias_name = args[i];
-					const char *alias_value = get_alias(alias_name);
+					const char *alias_value = get_alias(alias_name, alias_count, aliases);
 
 					if (alias_value != NULL)
 						printf("%s=%s\n", alias_name, alias_value);
@@ -59,14 +63,14 @@ void exec_alias(char **args)
 			}
 		}
 	} else if (_strcmp(args[0], "unalias") == 0)
-	{
 		exec_alias_helper(args);
-	}
 }
 /**
  * display_aliases - func that display the all aliases
+ * @aliases: list
+ * @alias_count: parameter
  */
-void display_aliases(void)
+void display_aliases(int alias_count, Alias aliases)
 {
 	if (alias_count > 0)
 	{
@@ -85,9 +89,11 @@ void display_aliases(void)
 /**
  * get_alias - get the value of a given alias
  * @alias_name: alias name
+ * @aliases: list
+ * @alias_count: parameter
  * Return: result
  */
-const char *get_alias(const char *alias_name)
+const char *get_alias(const char *alias_name, int alias_count, Alias aliases)
 {
 	for (int i = 0; i < alias_count; i++)
 	{

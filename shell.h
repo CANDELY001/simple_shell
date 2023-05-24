@@ -42,10 +42,6 @@ typedef struct t_alias
 	char value[MAX_ALIAS_VALUE_LENGTH];
 } Alias;
 
-/** Global aliases array and count*/
-Alias aliases[MAX_ALIASES];
-int alias_count;
-
 char *read_input();
 
 /*Useful functions*/

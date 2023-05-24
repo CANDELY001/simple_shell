@@ -6,12 +6,14 @@
 void run_commands_from_file(char *filename)
 {
 	FILE *file = fopen(filename, "r");
+
 	if (file == NULL)
 	{
 		printf("Error opening file: %s\n", filename);
 		return;
 	}
 	char line[MAX_COMMAND_LENGTH];
+
 	while (fgets(line, sizeof(line), file))
 	{
 		if (line[strlen(line) - 1] == '\n')
@@ -51,11 +53,13 @@ void exec_file(char *command)
 	} else
 	{
 		int status;
+
 		waitpid(pid, &status, 0);
 
 		if (WIFEXITED(status))
 		{
 			int exit_status = WEXITSTATUS(status);
+
 			printf("Child process exited with status: %d\n", exit_status);
 		}
 	}
@@ -70,6 +74,7 @@ int tokenize_command(char *command, char *args[])
 {
 	int i = 0;
 	char *token = strtok(command, " ");
+
 	while (token != NULL)
 	{
 		args[i] = token;

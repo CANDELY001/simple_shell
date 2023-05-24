@@ -1,5 +1,22 @@
 #include "shell.h"
 /**
+ * exec_alias_helper - execute alias commands helper
+ * @args: array of words
+ */
+ void exec_alias_helper(char **args)
+ {
+     int i = 1;
+
+		while (args[i] != NULL)
+		{
+			const char *alias_name = args[i];
+
+			if (!unset_alias(alias_name))
+				printf("Alias '%s' not found.\n", alias_name);
+			i++;
+		}
+ }
+ /**
  * exec_alias - execute alias commands
  * @args: array of words
  */
@@ -43,16 +60,7 @@ void exec_alias(char **args)
 		}
 	} else if (_strcmp(args[0], "unalias") == 0)
 	{
-		int i = 1;
-
-		while (args[i] != NULL)
-		{
-			const char *alias_name = args[i];
-
-			if (!unset_alias(alias_name))
-				printf("Alias '%s' not found.\n", alias_name);
-			i++;
-		}
+		exec_alias_helper(args);
 	}
 }
 /**

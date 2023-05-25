@@ -13,14 +13,13 @@ int _setenv(const char *name, const char *value, int overwrite)
 	size_t value_len = _strlen(value);
 	size_t total_len = namelen + value_len + 2;
 	char *env_var = malloc(total_len);
+	int result;
 
 	if (name == NULL || value == NULL)
 		return (-1);
 	if (env_var == NULL)
 		return (-1);
 	snprintf(env_var, total_len, "%s=%s", name, value);
-	int result;
-
 	if (overwrite)
 		result = putenv(env_var);
 	else

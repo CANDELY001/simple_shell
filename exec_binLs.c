@@ -27,5 +27,6 @@ void exec_binLs(char **arr_words)
 	}
 	else
 		waitpid(pid, &curr_status, 0);
+	i++;
     }
 }

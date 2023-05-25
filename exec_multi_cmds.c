@@ -8,7 +8,7 @@
  */
 int exec_multi_cmds(char *prompt, char *sh_name, int cnt)
 {
-	int num_of_cmds, num_of_words, i, ex_code;
+	int num_of_cmds, num_of_words, i, ex_code = 0;
 	char **arr_of_cmds, **arr_of_words;
 
 	arr_of_cmds = split_string(prompt, ";", &num_of_cmds);

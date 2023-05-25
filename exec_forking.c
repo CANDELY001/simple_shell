@@ -22,28 +22,7 @@ char **comment(char **s)
 	}
 	return (s);
 }
-/**
- * komod - executes a command using the fork-exec
- * @ex_str: command to execute
- * @arr: array of arguments
- * @cur_s: variable to store the status
- * @exit_code: parameter
- * Return: error code
- */
-int komod(char *ex_str, char **arr, int *cur_s, int exit_code)
-{
-	pid_t pid = fork();
-	int code = exit_code;
 
-	if (pid == 0)
-		cmd_execve(ex_str, arr);
-	else if (pid < 0)
-		return (errno);
-	wait_kid_process(pid, cur_s);
-	if (WIFEXITED(*cur_s))
-		code = WEXITSTATUS(*cur_s);
-	return (code);
-}
 /**
  * exec_forking - executes a command using the fork-exec
  * @arr_words: arr containing commands
@@ -59,6 +38,7 @@ int exec_forking(char **arr_words, char *prompt, char *name, int cnt, int n)
 	int curr_status, ex_code = 0;
 	char ex_code_str[10], pid_str[10];
 	const char *variable_env;
+	pid_t pid;
 
 	if (arr_words)
 	{
@@ -87,8 +67,16 @@ int exec_forking(char **arr_words, char *prompt, char *name, int cnt, int n)
 		replace_variable(arr_words, "$?", ex_code_str);
 		replace_variable(arr_words, "$$", pid_str);
 		variable_env = arr_words[1] + 1;
+
 		replace_variable(arr_words, "$", variable_env);
-		ex_code = komod(cmd_to_exec, arr_words, &curr_status, ex_code);
+		pid = fork();
+		if (pid == 0)
+			cmd_execve(cmd_to_exec, arr_words);
+		else if (pid < 0)
+			return (errno);
+		wait_kid_process(pid, &curr_status);
+		if (WIFEXITED(curr_status))
+			ex_code = WEXITSTATUS(curr_status);
 	}
 	if (_strncmp(*arr_words, "./", 2) != 0 && _strncmp(*arr_words, "/", 1) != 0)
 		free(cmd_to_exec);

@@ -131,9 +131,9 @@ int unset_alias(const char *alias_name, int alias_count, Alias *aliases)
 void insert_existing_aliases(int alias_count, Alias *aliases)
 {
 	int i;
-	alias_count = 0;
 	char *alias_name, *alias_value;
 
+	alias_count = 0;
 	for (i = 0; environ[i] != NULL; i++)
 	{
 		char *env_var = environ[i];

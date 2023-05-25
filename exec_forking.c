@@ -18,7 +18,7 @@ int exec_forking(char **arr_words, char *prompt, char *name, int cnt, int n)
 	if (arr_words)
 	{
 		cmd = arr_words[0];
-		if (_strcmp(cmd, "/bin/ls") == 0)
+		if (_strcmp(cmd, "/bin/ls") == 0 || _strncmp(cmd, "./", 2) == 0)
 		{
 			exec_binLs(arr_words);
 			return (0);

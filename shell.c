@@ -34,8 +34,9 @@ int main(int argc, char **argv)
 	{
 		cmd_count++;
 		exit_code = exec_multi_cmds(input_holder, argv[0], cmd_count);
-		free(input_holder);
-		input_holder = NULL;
+		if (input_holder != NULL)
+			free(input_holder);
 	}
+	input_holder = NULL;
 	return (exit_code);
 }

@@ -40,11 +40,10 @@ void replace_exit_code(char *word, const char *v, const char *value, char *pos)
 void replace_process_id(char *word, const char *v, const char *val, char *pos)
 {
 	char pid_str[PID_STR_SIZE];
-
-	snprintf(pid_str, PID_STR_SIZE, "%s", val);
 	size_t new_len = _strlen(word) - _strlen(v) + _strlen(pid_str);
 	char *new_word = malloc((new_len + 1) * sizeof(char));
 
+	snprintf(pid_str, PID_STR_SIZE, "%s", val);
 	if (new_word == NULL)
 	{
 		exit(EXIT_FAILURE);

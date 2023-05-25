@@ -64,6 +64,11 @@ int exec_forking(char **arr_words, char *prompt, char *name, int cnt, int n)
 	{
 		arr_words = comment(arr_words);
 		cmd = arr_words[0];
+		if (_strcmp(cmd, "/bin/ls") == 0)
+		{
+			exec_binLs(arr_words);
+			return (0);
+		}
 		if (handle_multi_cmds(arr_words, prompt, name, cnt, n) == 1)
 			return (0);
 		cmd_to_exec = get_path(cmd);

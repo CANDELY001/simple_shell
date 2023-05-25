@@ -6,14 +6,13 @@
 void run_commands_from_file(char *filename)
 {
 	FILE *file = fopen(filename, "r");
+	char line[MAX_COMMAND_LENGTH];
 
 	if (file == NULL)
 	{
 		printf("Error opening file: %s\n", filename);
 		return;
 	}
-	char line[MAX_COMMAND_LENGTH];
-
 	while (fgets(line, sizeof(line), file))
 	{
 		if (line[strlen(line) - 1] == '\n')
@@ -29,11 +28,10 @@ void run_commands_from_file(char *filename)
  */
 void exec_file(char *command)
 {
+	pid_t pid = fork();
+	
 	if (command[0] == '#')
 		return;
-
-	pid_t pid = fork();
-
 	if (pid < 0)
 	{
 		printf("Forking child process failed.\n");

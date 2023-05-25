@@ -91,11 +91,6 @@ int exec_forking(char **arr_words, char *prompt, char *name, int cnt, int n)
 		variable_env = arr_words[1] + 1;
 		replace_variable(arr_words, "$", variable_env);
 		ex_code = komod(cmd_to_exec, arr_words, &curr_status, ex_code);
-		if (ex_code == 127)
-		{
-			p_the_err(intToString(cnt), name, cmd, "not found\n");
-			free(cmd_to_exec);
-		}
 	}
 	if (_strncmp(*arr_words, "./", 2) != 0 && _strncmp(*arr_words, "/", 1) != 0)
 		free(cmd_to_exec);

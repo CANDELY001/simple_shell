@@ -130,8 +130,8 @@ int unset_alias(const char *alias_name, int alias_count, Alias *aliases)
  */
 void insert_existing_aliases(int alias_count, Alias *aliases)
 {
-	alias_count = 0;
 	int i;
+	alias_count = 0;
 	char *alias_name, *alias_value;
 
 	for (i = 0; environ[i] != NULL; i++)

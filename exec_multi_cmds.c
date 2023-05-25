@@ -43,13 +43,8 @@ int exec_multi_cmds(char *prompt, char *sh_name, int cnt)
 			handle_exit_status(arr_of_words, prompt, sh_name, cnt, num_of_words);
 		}
 		ex_code = exec_forking(arr_of_words, prompt, sh_name, cnt, num_of_words);
-		if (ex_code != 0)
-        	{
-          	  	printf("Error executing command: %s\n", arr_of_cmds[i]);
-            		break;
-        	}
-    	}
-    	if (arr_of_cmds != NULL)
-        	free_words(arr_of_cmds, num_of_cmds);
+	}
+	if (arr_of_cmds != NULL)
+		free_words(arr_of_cmds, num_of_cmds);
 	return (ex_code);
 }

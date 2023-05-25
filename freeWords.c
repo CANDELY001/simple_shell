@@ -8,7 +8,7 @@
 /* BY CHARIFA MASBAHI & NORA JEOUT*/
 void free_words(char **s, int n)
 {
-	int i;
+	int i = 0;
 
 	if (!s)
 		return;

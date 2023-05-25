@@ -64,7 +64,7 @@ int add_alias(const char *n, const char *v, int alias_count, Alias *aliases)
 int delete_alias(const char *alias_name, int alias_count, Alias *aliases)
 {
 	int i;
-	char env_name[MAX_ALIAS_NAME_LENGTH + 7];
+	char env_name[MAX_ALIAS_NAME_LENGTH + 7] = "ALIAS_";
 
 	for (i = 0; i < alias_count; i++)
 	{
@@ -78,8 +78,6 @@ int delete_alias(const char *alias_name, int alias_count, Alias *aliases)
 				_strcpy(aliases[j].value, aliases[j + 1].value);
 			}
 			alias_count--;
-			env_name = "ALIAS_";
-
 			strcat(env_name, alias_name);
 			_unsetenv(env_name);
 			return (1);
@@ -98,8 +96,8 @@ int delete_alias(const char *alias_name, int alias_count, Alias *aliases)
  */
 int unset_alias(const char *alias_name, int alias_count, Alias *aliases)
 {
-	int i;
-	char *env_name[MAX_ALIAS_NAME_LENGTH + 7];
+	int i, o;
+	char env_name[MAX_ALIAS_NAME_LENGTH + 7] = "ALIAS_";
 	const char *name;
 
 	for (i = 0; i < alias_count; i++)
@@ -113,11 +111,9 @@ int unset_alias(const char *alias_name, int alias_count, Alias *aliases)
 				aliases[j] = aliases[j + 1];
 			}
 			alias_count--;
-			env_name[MAX_ALIAS_NAME_LENGTH + 7] = "ALIAS_";
 			_strcat(env_name, alias_name);
 			name = env_name;
-			int o = _unsetenv(name);
-
+			o = _unsetenv(name);
 			if (o >= 0)
 				printf("Alias '%s' has been removed.\n", alias_name);
 			return (1);
@@ -135,10 +131,10 @@ int unset_alias(const char *alias_name, int alias_count, Alias *aliases)
 void insert_existing_aliases(int alias_count, Alias *aliases)
 {
 	alias_count = 0;
-	int i = 0;
+	int i;
 	char *alias_name, *alias_value;
 
-	for (; environ[i] != NULL; i++)
+	for (i = 0; environ[i] != NULL; i++)
 	{
 		char *env_var = environ[i];
 

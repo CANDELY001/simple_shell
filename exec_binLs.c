@@ -14,8 +14,6 @@ void exec_binLs(char **arr_words)
 	if (pid == 0)
 	{
 		cmd_execve("/bin/ls", arr_words);
-		perror("Error executing command\n");
-		exit(100);
 	} else if (pid < 0)
 	{
 		perror("Error forking");

@@ -13,7 +13,7 @@ int exec_forking(char **arr_words, char *prompt, char *name, int cnt, int n)
 {
 	char *cmd = NULL, *cmd_to_exec = NULL, *curr_cnt = NULL;
 	pid_t pid;
-	int curr_status, ex_code;
+	int curr_status, ex_code = 0;
 
 	if (arr_words)
 	{

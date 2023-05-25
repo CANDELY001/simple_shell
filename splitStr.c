@@ -11,7 +11,7 @@
 char **split_string(char *s, const char *separator, int *n)
 {
 	char *s_copy = NULL, *word = NULL, **words;
-	int i;
+	int i = 0;
 
 	s_copy = malloc(sizeof(char) * _strlen(s) + 1);
 	if (!s_copy)

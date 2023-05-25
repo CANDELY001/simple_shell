@@ -64,11 +64,6 @@ int exec_forking(char **arr_words, char *prompt, char *name, int cnt, int n)
 	{
 		arr_words = comment(arr_words);
 		cmd = arr_words[0];
-		if (_strcmp(cmd, "/bin/ls") == 0)
-		{
-			exec_binLs(arr_words);
-			return (0);
-		}
 		if (handle_multi_cmds(arr_words, prompt, name, cnt, n) == 1)
 			return (0);
 		cmd_to_exec = get_path(cmd);
@@ -89,7 +84,6 @@ int exec_forking(char **arr_words, char *prompt, char *name, int cnt, int n)
 		variable_env = arr_words[1] + 1;
 		replace_variable(arr_words, "$", variable_env);
 		ex_code = komod(cmd_to_exec, arr_words, &curr_status, ex_code);
-		ex_code = (WIFEXITED(curr_status)) ? WEXITSTATUS(curr_status) : ex_code;
 	}
 	if (_strncmp(*arr_words, "./", 2) != 0 && _strncmp(*arr_words, "/", 1) != 0)
 		free(cmd_to_exec);

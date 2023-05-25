@@ -34,7 +34,7 @@ int exec_multi_cmds(char *prompt, char *sh_name, int cnt)
 		if (num_of_words == 0)
 		{
 			free_words(arr_of_cmds, num_of_cmds);
-			free_words(arr_of_words, num_of_cmds);
+			free_words(arr_of_words, num_of_words);
 			return (0);
 		}
 		if (_strcmp(arr_of_words[0], "exit") == 0)

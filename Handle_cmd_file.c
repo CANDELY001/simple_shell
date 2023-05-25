@@ -39,8 +39,8 @@ void exec_file(char *command)
 	} else if (pid == 0)
 	{
 		char *args[MAX_ARGS];
-		int num_args = tokenize_command(command, args);
-
+		
+		tokenize_command(command, args);
 		if (execvp(args[0], args) == -1)
 		{
 			printf("Command execution failed: %s\n", args[0]);

@@ -17,7 +17,7 @@ int exec_forking(char **arr_words, char *prompt, char *name, int cnt, int n)
 	int curr_status, ex_code = 0;
 	char ex_code_str[10];
 	char pid_str[10];
-	const char *variable_env = arr_words[1] + 1;
+	const char *variable_env;
 
 	if (arr_words)
 	{
@@ -55,6 +55,7 @@ int exec_forking(char **arr_words, char *prompt, char *name, int cnt, int n)
 		snprintf(pid_str, sizeof(pid_str), "%d", getpid());
 		replace_variable(arr_words, "$?", ex_code_str);
 		replace_variable(arr_words, "$$", pid_str);
+		variable_env = arr_words[1] + 1
 		replace_variable(arr_words, "$", variable_env);
 		pid = fork();
 		if (pid == 0)

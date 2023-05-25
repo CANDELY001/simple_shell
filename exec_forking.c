@@ -36,8 +36,10 @@ int komod(char *ex_str, char **arr, int *cur_s, int exit_code)
 	int code = exit_code;
 
 	if (pid == 0)
+	{
 		cmd_execve(ex_str, arr);
-	else if (pid < 0)
+		exit(127);
+	} else if (pid < 0)
 		return (errno);
 	wait_kid_process(pid, cur_s);
 	if (WIFEXITED(*cur_s))

@@ -17,5 +17,5 @@ int read_from_input(char *read_buf)
 			read_buf[0] = '\0';
 		return (0);
 	}
-	return (start);
+	return (1);
 }

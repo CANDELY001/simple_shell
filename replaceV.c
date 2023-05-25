@@ -9,10 +9,12 @@
 void replace_exit_code(char *word, const char *v, const char *value, char *pos)
 {
 	char exit_code_str[EXIT_CODE_STR_SIZE];
+	size_t new_len;
+	char *new_word;
 
 	snprintf(exit_code_str, EXIT_CODE_STR_SIZE, "%s", value);
-	size_t new_len = _strlen(word) - _strlen(v) + _strlen(exit_code_str);
-	char *new_word = malloc((new_len + 1) * sizeof(char));
+	new_len = _strlen(word) - _strlen(v) + _strlen(exit_code_str);
+	new_word = malloc((new_len + 1) * sizeof(char));
 
 	if (new_word == NULL)
 	{

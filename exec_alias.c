@@ -99,7 +99,9 @@ void display_aliases(int alias_count, Alias *aliases)
  */
 const char *get_alias(const char *alias_name, int alias_count, Alias *aliases)
 {
-	for (int i = 0; i < alias_count; i++)
+	int i;
+
+	for (i = 0; i < alias_count; i++)
 	{
 		if (_strcmp(aliases[i].name, alias_name) == 0)
 		{

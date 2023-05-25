@@ -8,11 +8,11 @@
 /* BY CHARIFA MASBAHI & NORA JEOUT*/
 void cmd_execve(char *cmd, char **arr_words)
 {
-	if (execve(cmd, arr_words, NULL) == -1)
-	{
-		perror("Error executing command");
-		return;
-	}
+    if (execvp(cmd, arr_words) == -1)
+    {
+        perror("Error executing command");
+        exit(100);
+    }
 }
 
 /**

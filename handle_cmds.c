@@ -32,7 +32,7 @@ int handle_multi_cmds_Helper(char **arr, int *ex_code)
 		return (1);
 	} else if (_strcmp(cmd, "echo") == 0 && _strcmp(arr[1], "$?") == 1)
 	{
-		snprintf(ex_code_str, sizeof(ex_code_str), "%d", ex_code);
+		snprintf(ex_code_str, sizeof(ex_code_str), "%d", *ex_code);
 		replace_variable(arr, "$?", ex_code_str);
 		return (1);
 	} else if (_strcmp(cmd, "echo") == 0 && arr[1][0] == '$')

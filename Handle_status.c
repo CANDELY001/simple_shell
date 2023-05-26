@@ -28,9 +28,10 @@ void handle_exit_status(char **arr, char *ppt, char *name, int c, int n)
 			free_words(arr, n);
 			exit(2);
 		}
-	}
+	} else
+		ex_stat = 2;
 
 	free(ppt);
 	free_words(arr, n);
-	exit(0);
+	exit(ex_stat);
 }

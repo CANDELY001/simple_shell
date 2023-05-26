@@ -11,7 +11,7 @@
 /*BY CHARIFA MASBAHI & NORA JEOUT*/
 void handle_exit_status(char **arr, char *ppt, char *name, int c, int n)
 {
-	int ex_stat = 0;
+	int ex_stat = 2;
 
 	if (arr[1] != NULL)
 	{

@@ -1,5 +1,27 @@
 #include "shell.h"
-/* BY CHARIFA MASBAHI & NORA JEOUT"*/
+/* BY CHARIFA MASBAHI & NORA JEOUT*/
+/* BY CHARIFA MASBAHI & NORA JEOUT*/
+/**
+ * comment - executes a command using the fork-exec
+ * @s: ------------------
+ * Return: err code
+ */
+char **comment(char **s)
+{
+	int i = 0;
+
+	while (s[i] != NULL)
+	{
+		if (s[i][0] == '#')
+		{
+			free(s[i]);
+			s[i] = NULL;
+			break;
+		}
+		i++;
+	}
+	return (s);
+}
 /**
  * exec_forking - executes a command using the fork-exec
  * @arr_words: arr containing commands
@@ -17,6 +39,7 @@ int exec_forking(char **arr_words, char *prompt, char *name, int cnt, int n)
 
 	if (arr_words)
 	{
+		arr_words = comment(arr_words);
 		cmd = arr_words[0];
 		if (_strcmp(cmd, "/bin/ls") == 0)
 		{

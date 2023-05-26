@@ -20,7 +20,6 @@ void p_the_err(char *cnt, char *sh_name, char *cmd, char *msg)
 	}
 	write(STDERR_FILENO, ": ", 2);
 	write(STDERR_FILENO, msg, _strlen(msg));
-	exit(2);
 }
 
 /**

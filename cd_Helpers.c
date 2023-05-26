@@ -66,9 +66,10 @@ char *handle_cwd()
 /**
  * switch_current_dir - Changes the current working directory.
  * @dir: The directory to change to.
+ * Return: chi haja waa yarbi ykhdem ra fesni had zmr
  */
 /* BY CHARIFA MASBAHI & NORA JEOUT*/
-void switch_current_dir(const char *dir)
+int switch_current_dir(const char *dir)
 {
 	int ret = chdir(dir);
 

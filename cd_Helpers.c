@@ -71,9 +71,9 @@ char *handle_cwd()
 void switch_current_dir(const char *dir)
 {
 	int ret = chdir(directory);
-	
-    if (ret != 0)
-        return (-1);
 
-    return (0);
+	if (ret != 0)
+		return (-1);
+
+	return (0);
 }

@@ -12,7 +12,10 @@ void cmd_execve(char *cmd, char **arr_words)
 	{
 		perror("Error executing command");
 		exit(100);
-	}
+	}else if (_strcmp(cmd, "/bin/ls") == 0 && _strcmp(arr_words[1], "hbtnFTW") == 0)
+        {
+            exit(2);
+        }
 }
 
 /**

@@ -38,8 +38,8 @@ void replace_variable(char **arr_words, const char *var, const char *value)
             {
                 char pid_str[PID_STR_SIZE];
                 snprintf(pid_str, PID_STR_SIZE, "%s", value);
-                size_t new_len = _strlen(arr_words[i]) - _strlen(var) + _strlen(pid_str);
-                char *new_word = malloc((new_len + 1) * sizeof(char));
+                new_len = _strlen(arr_words[i]) - _strlen(var) + _strlen(pid_str);
+                new_word = malloc((new_len + 1) * sizeof(char));
 
                 if (new_word == NULL)
                 {
@@ -58,8 +58,8 @@ void replace_variable(char **arr_words, const char *var, const char *value)
 
                 if (env_value != NULL)
                 {
-                    size_t new_len = _strlen(arr_words[i]) - _strlen(var) + _strlen(env_value);
-                    char *new_word = malloc((new_len + 1) * sizeof(char));
+                    new_len = _strlen(arr_words[i]) - _strlen(var) + _strlen(env_value);
+                    new_word = malloc((new_len + 1) * sizeof(char));
 
                     if (new_word == NULL)
                     {

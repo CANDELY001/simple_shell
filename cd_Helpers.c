@@ -70,7 +70,7 @@ char *handle_cwd()
 /* BY CHARIFA MASBAHI & NORA JEOUT*/
 void switch_current_dir(const char *dir)
 {
-	int ret = chdir(directory);
+	int ret = chdir(dir);
 
 	if (ret != 0)
 		return (-1);

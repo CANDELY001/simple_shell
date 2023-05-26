@@ -43,4 +43,5 @@ void ex_err(char **arr_of_words, int cntr, char *sh_name)
 	write(STDOUT_FILENO, arr_of_words[1], _strlen(arr_of_words[1]));
 	write(STDOUT_FILENO, "\n", 2);
 	free(err_code);
+	exit(2);
 }

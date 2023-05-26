@@ -10,8 +10,19 @@ void cmd_execve(char *cmd, char **arr_words)
 {
 	if (execvp(cmd, arr_words) == -1)
 	{
-		perror("Error executing command");
-		exit(100);
+		if (errno == ENOENT)
+        {
+            write(STDERR_FILENO, cmd, _strlen(cmd));
+            write(STDERR_FILENO, ": cannot access '", 17);
+            write(STDERR_FILENO, arr_words[1], _strlen(arr_words[1]));
+            write(STDERR_FILENO, "': No such file or directory\n", 29);
+            exit(2);
+        }
+        else
+        {
+            perror("Error executing command");
+            exit(100);
+        }
 	}
 }
 

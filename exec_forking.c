@@ -70,5 +70,8 @@ int exec_forking(char **arr_words, char *prompt, char *name, int cnt, int n)
 		if (WIFEXITED(curr_status))
 			ex_code = (WEXITSTATUS(curr_status));
 	}
+	if (arr_words && (cmd_to_exec != arr_words[0]) &&
+		       	_strncmp(*arr_words, "./", 2) != 0 && _strncmp(*arr_words, "/", 1) != 0)
+		free(cmd_to_exec);
 	return (ex_code);
 }

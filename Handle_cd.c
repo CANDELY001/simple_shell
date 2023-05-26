@@ -15,7 +15,7 @@ void handle_cd(char **arr_words)
 	}
 	else if (_strcmp(arr_words[1], "-") == 0)
 	{
-		initial_directory = env_vars("the_old_pwd", environ);
+		initial_directory = env_vars("OLDPWD", environ);
 		if (initial_directory == NULL)
 		{
 			isError("OLDPWD not set");

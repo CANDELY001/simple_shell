@@ -61,6 +61,11 @@ int exec_forking(char **arr_words, char *prompt, char *name, int cnt, int n)
 			free(curr_cnt);
 			return (127);
 		}
+		if (_strcmp(cmd, "exit") == 0)
+		{
+			free(cmd_to_exec);
+			exit(ex_code);
+		}
 		pid = fork();
 		if (pid == 0)
 			cmd_execve(cmd_to_exec, arr_words);

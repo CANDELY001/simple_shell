@@ -21,7 +21,9 @@ void handle_exit_status(char **arr, char *ppt, char *name, int c, int n)
 		} else
 		{
 			ex_err(arr, c, name);
-			return;
+			free(ppt);
+			free_words(arr, n);
+			exit(2);
 		}
 	}
 

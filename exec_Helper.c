@@ -10,15 +10,8 @@ void cmd_execve(char *cmd, char **arr_words)
 {
 	if (execvp(cmd, arr_words) == -1)
 	{
-		if (errno == ENOENT && _strcmp(cmd, "/bin/ls") == 0)
-		{
-			exit(2);
-		}
-		else
-		{
-			perror("Error executing command");
-			exit(100);
-		}
+		perror("Error executing command");
+		exit(100);
 	}
 }
 

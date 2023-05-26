@@ -60,7 +60,7 @@ int handle_multi_cmds(char **arr, char *ppt, char *name, int cnt, int n)
 		if (arr[1])
 			_unsetenv(arr[1]);
 		else
-			{
+		{
 			perror("Usage: setenv VARIABLE VALUE\n");
 			exit(0);
 		}

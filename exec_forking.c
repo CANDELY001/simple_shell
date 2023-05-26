@@ -40,6 +40,8 @@ int exec_forking(char **arr_words, char *prompt, char *name, int cnt, int n)
 	if (arr_words)
 	{
 		arr_words = comment(arr_words);
+		if (!arr_words)
+			return (0);
 		cmd = arr_words[0];
 		if (_strcmp(cmd, "/bin/ls") == 0)
 		{

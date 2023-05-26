@@ -16,7 +16,7 @@ char **comment(char **s)
 		{
 			free(s[i]);
 			s[i] = NULL;
-			break;
+			return (s);
 		}
 		i++;
 	}
@@ -40,7 +40,7 @@ int exec_forking(char **arr_words, char *prompt, char *name, int cnt, int n)
 	if (arr_words)
 	{
 		arr_words = comment(arr_words);
-		if (!arr_words)
+		if (arr_words == NULL || arr_words[0] == NULL)
 			return (0);
 		cmd = arr_words[0];
 		if (_strcmp(cmd, "/bin/ls") == 0)

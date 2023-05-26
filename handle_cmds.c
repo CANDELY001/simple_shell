@@ -2,10 +2,11 @@
 /**
  * handle_multi_cmds_Helper - handle env, setenv..
  * @arr: the cmds provided
+ * @ex_code: pointer to the exit code variable
  * Return: 1 if one of the cmd is found or 0
  */
 /* BY CHARIFA MASBAHI & NORA JEOUT*/
-int handle_multi_cmds_Helper(char **arr)
+int handle_multi_cmds_Helper(char **arr, int *ex_code)
 {
 	char *cmd = arr[0], *variable_env,
 	     pid_str[PID_STR_SIZE], ex_code_str[EXIT_CODE_STR_SIZE];
@@ -83,7 +84,7 @@ int handle_multi_cmds(char **arr, char *ppt, char *name, int cnt, int n)
 	{
 		handle_cd(arr);
 		cmd_was_handled = 1;
-	} else if (handle_multi_cmds_Helper(arr) == 1)
+	} else if (handle_multi_cmds_Helper(arr, &ex_code) == 1)
 	{
 		cmd_was_handled = 1;
 	}

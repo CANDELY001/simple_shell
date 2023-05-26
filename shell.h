@@ -109,7 +109,7 @@ char *env_vars(const char *env_name, char **env_ptr);
 void isError(const char *msg);
 char *get_dir(const char *init_p);
 char *handle_cwd();
-void switch_current_dir(const char *dir);
+int switch_current_dir(const char *dir);
 
 /*execute multiple commands*/
 int exec_multi_cmds(char *prompt, char *sh_name, int cnt);

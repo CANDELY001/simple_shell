@@ -11,13 +11,16 @@
 /*BY CHARIFA MASBAHI & NORA JEOUT*/
 void handle_exit_status(char **arr, char *ppt, char *name, int c, int n)
 {
-	int ex_stat = 2;
+	int ex_stat = 0;
 
 	if (arr[1] != NULL)
 	{
 		if (_isdigit(arr[1][0]))
 		{
 			ex_stat = _atoi(arr[1]) % 256;
+			free(ppt);
+			free_words(arr, n);
+			exit(ex_stat);
 		} else
 		{
 			ex_err(arr, c, name);
@@ -29,5 +32,5 @@ void handle_exit_status(char **arr, char *ppt, char *name, int c, int n)
 
 	free(ppt);
 	free_words(arr, n);
-	exit(ex_stat);
+	exit(2);
 }

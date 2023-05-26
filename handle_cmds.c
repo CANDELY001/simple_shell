@@ -50,14 +50,20 @@ int handle_multi_cmds(char **arr, char *ppt, char *name, int cnt, int n)
 		if (arr[1] && arr[2])
 			_setenv(arr[1], arr[2], 1);
 		else
+		{
 			perror("Usage: setenv VARIABLE VALUE\n");
+			exit(0);
+		}
 		cmd_was_handled = 1;
 	} else if (_strcmp(cmd, "unsetenv") == 0)
 	{
 		if (arr[1])
 			_unsetenv(arr[1]);
 		else
-			perror("Usage: unsetenv VARIABLE\n");
+			{
+			perror("Usage: setenv VARIABLE VALUE\n");
+			exit(0);
+		}
 		cmd_was_handled = 1;
 	} else if (_strcmp(cmd, "cd") == 0)
 	{

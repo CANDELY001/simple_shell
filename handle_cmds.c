@@ -54,7 +54,7 @@ int handle_multi_cmds_Helper(char **arr)
 int handle_multi_cmds(char **arr, char *ppt, char *name, int cnt, int n)
 {
 	char *cmd = arr[0];
-	int cmd_was_handled = 0;
+	int cmd_was_handled = 0, ex_code = 0;
 	(void)name, (void)cnt, (void)n, (void)ppt;
 
 	if (_strcmp(cmd, "env") == 0)

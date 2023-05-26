@@ -17,14 +17,7 @@ void handle_exit_status(char **arr, char *ppt, char *name, int c, int n)
 	{
 		if (_isdigit(arr[1][0]))
 		{
-			ex_stat = _atoi(arr[1]);
-			if (ex_stat < 0 || ex_stat > 255)
-			{
-				ex_err(arr, c, name);
-				free(ppt);
-				free_words(arr, n);
-				exit(2);
-			}
+			ex_stat = _atoi(arr[1]) % 256;
 		} else
 		{
 			ex_err(arr, c, name);

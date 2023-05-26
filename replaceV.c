@@ -9,7 +9,8 @@
 void replace_variable(char **arr_words, const char *var, const char *value)
 {
     int i = 0;
-    size_t new_len, char *new_word;
+    size_t new_len;
+    char *new_word;
 
     while (arr_words[i] != NULL)
     {

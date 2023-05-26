@@ -7,7 +7,7 @@
 /* BY CHARIFA MASBAHI & NORA JEOUT*/
 int handle_multi_cmds_Helper(char **arr)
 {
-	char *cmd = arr[0], char *variable_env,
+	char *cmd = arr[0], *variable_env,
 	     pid_str[PID_STR_SIZE], ex_code_str[EXIT_CODE_STR_SIZE];
 
 	if (_strcmp(cmd, "alias") == 0)
@@ -28,14 +28,17 @@ int handle_multi_cmds_Helper(char **arr)
 	{
 		snprintf(pid_str, sizeof(pid_str), "%d", getpid());
 		replace_variable(arr_words, "$$", pid_str);
+		return (1);
 	} else if (_strcmp(cmd, "echo") == 0 && _strcmp(arr[1], "$?") == 1)
 	{
 		snprintf(ex_code_str, sizeof(ex_code_str), "%d", ex_code);
 		replace_variable(arr_words, "$?", ex_code_str);
-	} else if (_strcmp(cmd, "echo") == 0 && _strcmp(arr[1][1], "$") == 1)
+		return (1);
+	} else if (_strcmp(cmd, "echo") == 0 && arr[1][0] == '$')
 	{
 		variable_env = arr_words[1] + 1;
 		replace_variable(arr_words, "$", variable_env);
+		return (1);
 	}
 	return (0);
 }

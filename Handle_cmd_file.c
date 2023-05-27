@@ -6,23 +6,23 @@
  */
 void run_commands_from_file(char *filename)
 {
-    FILE *file = fopen(filename, "r");
-    char line[MAX_COMMAND_LENGTH];
+	FILE *file = fopen(filename, "r");
+	char line[MAX_COMMAND_LENGTH];
 
-    if (file == NULL)
-    {
-        printf("./hsh: 0: Can't open %s\n", filename);
-        return;
-    }
+	if (file == NULL)
+	{
+		printf("./hsh: 0: Can't open %s\n", filename);
+		return;
+	}
 
-    while (fgets(line, sizeof(line), file))
-    {
-        if (line[strlen(line) - 1] == '\n')
-            line[strlen(line) - 1] = '\0';
-        exec_file(line);
-    }
+	while (fgets(line, sizeof(line), file))
+	{
+		if (line[strlen(line) - 1] == '\n')
+			line[strlen(line) - 1] = '\0';
+		exec_file(line);
+	}
 
-    fclose(file);
+	fclose(file);
 }
 
 /**
@@ -31,42 +31,44 @@ void run_commands_from_file(char *filename)
  */
 void exec_file(char *command)
 {
-    pid_t pid;
-    int status;
+	pid_t pid;
+	int status;
 
-    if (command[0] == '#')
-        return;
+	if (command[0] == '#')
+		return;
 
-    pid = fork();
-    if (pid < 0)
-    {
-        printf("Forking child process failed.\n");
-        return;
-    }
-    else if (pid == 0)
-    {
-        char *args[MAX_ARGS];
-        tokenize_command(command, args);
+	pid = fork();
+	if (pid < 0)
+	{
+		printf("Forking child process failed.\n");
+		return;
+	}
+	else if (pid == 0)
+	{
+		char *args[MAX_ARGS];
 
-        if (execvp(args[0], args) == -1)
-        {
-            printf("./hsh: 0: Can't open %s\n", args[0]);
-            exit(EXIT_FAILURE);
-        }
+		tokenize_command(command, args);
 
-        exit(EXIT_SUCCESS);
-    }
-    else
-    {
-        waitpid(pid, &status, 0);
+		if (execvp(args[0], args) == -1)
+		{
+			printf("./hsh: 0: Can't open %s\n", args[0]);
+			exit(EXIT_FAILURE);
+		}
 
-        if (WIFEXITED(status))
-        {
-            int exit_status = WEXITSTATUS(status);
-            printf("Child process exited with status: %d\n", exit_status);
-            fflush(stdout);
-        }
-    }
+		exit(EXIT_SUCCESS);
+	}
+	else
+	{
+		waitpid(pid, &status, 0);
+
+		if (WIFEXITED(status))
+		{
+			int exit_status = WEXITSTATUS(status);
+
+			printf("Child process exited with status: %d\n", exit_status);
+			fflush(stdout);
+		}
+	}
 }
 
 /**
@@ -77,16 +79,16 @@ void exec_file(char *command)
  */
 int tokenize_command(char *command, char *args[])
 {
-    int i = 0;
-    char *token = strtok(command, " ");
+	int i = 0;
+	char *token = strtok(command, " ");
 
-    while (token != NULL && i < MAX_ARGS - 1)
-    {
-        args[i] = token;
-        i++;
-        token = strtok(NULL, " ");
-    }
-    args[i] = NULL;
+	while (token != NULL && i < MAX_ARGS - 1)
+	{
+		args[i] = token;
+		i++;
+		token = strtok(NULL, " ");
+	}
+	args[i] = NULL;
 
-    return (i);
+	return (i);
 }

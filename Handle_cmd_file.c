@@ -31,7 +31,7 @@ void run_commands_from_file(char *filename)
  */
 void exec_file(char *command)
 {
-	(void)command;  // Suppress unused parameter warning
+	(void)command;
 
 	pid_t pid = fork();
 

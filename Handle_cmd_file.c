@@ -41,7 +41,6 @@ void exec_file(char *command)
 	else if (pid == 0)
 	{
 		char *args[MAX_ARGS];
-		int arg_count = tokenize_command(command, args);
 
 		if (execvp(args[0], args) == -1)
 		{

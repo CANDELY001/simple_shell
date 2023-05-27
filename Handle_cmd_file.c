@@ -31,10 +31,9 @@ void run_commands_from_file(char *filename)
  */
 void exec_file(char *command)
 {
-	(void)command;
+	pid_t pid;
 
-	pid_t pid = fork();
-
+	pid = fork();
 	if (pid < 0)
 	{
 		printf("Forking child process failed.\n");
@@ -43,7 +42,7 @@ void exec_file(char *command)
 	else if (pid == 0)
 	{
 		char *args[MAX_ARGS];
-		int arg_count = tokenize_command(command, args);
+		tokenize_command(command, args);
 
 		if (execvp(args[0], args) == -1)
 		{

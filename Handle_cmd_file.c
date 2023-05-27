@@ -1,7 +1,8 @@
 #include "shell.h"
+
 /**
- * run_commands_from_file - Funcion
- * @filename: parameter
+ * run_commands_from_file - Execute commands from a file
+ * @filename: Name of the file
  */
 void run_commands_from_file(char *filename)
 {
@@ -10,9 +11,10 @@ void run_commands_from_file(char *filename)
 
 	if (file == NULL)
 	{
-		printf("Error opening file: %s\n", filename);
+		printf("./hsh: 0: Can't open %s\n", filename);
 		return;
 	}
+
 	while (fgets(line, sizeof(line), file))
 	{
 		if (line[strlen(line) - 1] == '\n')
@@ -22,25 +24,25 @@ void run_commands_from_file(char *filename)
 
 	fclose(file);
 }
+
 /**
- * exec_file - function
- * @command: parameter
+ * exec_file - Execute a command
+ * @command: The command to execute
  */
 void exec_file(char *command)
 {
 	pid_t pid = fork();
 
-	if (command[0] == '#')
-		return;
 	if (pid < 0)
 	{
 		printf("Forking child process failed.\n");
 		return;
-	} else if (pid == 0)
+	}
+	else if (pid == 0)
 	{
 		char *args[MAX_ARGS];
+		int arg_count = tokenize_command(command, args);
 
-		tokenize_command(command, args);
 		if (execvp(args[0], args) == -1)
 		{
 			printf("Command execution failed: %s\n", args[0]);
@@ -48,32 +50,32 @@ void exec_file(char *command)
 		}
 
 		exit(EXIT_SUCCESS);
-	} else
+	}
+	else
 	{
 		int status;
-
 		waitpid(pid, &status, 0);
 
 		if (WIFEXITED(status))
 		{
 			int exit_status = WEXITSTATUS(status);
-
 			printf("Child process exited with status: %d\n", exit_status);
 		}
 	}
 }
+
 /**
- * tokenize_command - function
- * @command: parameter
- * @args: parameter
- * Return: result
+ * tokenize_command - Tokenize a command string into arguments
+ * @command: The command string to tokenize
+ * @args: Array to store the tokenized arguments
+ * Return: The number of arguments
  */
 int tokenize_command(char *command, char *args[])
 {
 	int i = 0;
 	char *token = strtok(command, " ");
 
-	while (token != NULL)
+	while (token != NULL && i < MAX_ARGS - 1)
 	{
 		args[i] = token;
 		i++;

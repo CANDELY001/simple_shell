@@ -27,10 +27,12 @@ void run_commands_from_file(char *filename)
 
 /**
  * exec_file - Execute a command
- * @command: The command to execute
+ * @command: The command to execute (unused)
  */
 void exec_file(char *command)
 {
+	(void)command;  // Suppress unused parameter warning
+
 	pid_t pid = fork();
 
 	if (pid < 0)
@@ -41,6 +43,7 @@ void exec_file(char *command)
 	else if (pid == 0)
 	{
 		char *args[MAX_ARGS];
+		int arg_count = tokenize_command(command, args);
 
 		if (execvp(args[0], args) == -1)
 		{
@@ -59,6 +62,7 @@ void exec_file(char *command)
 		{
 			int exit_status = WEXITSTATUS(status);
 			printf("Child process exited with status: %d\n", exit_status);
+			fflush(stdout);
 		}
 	}
 }

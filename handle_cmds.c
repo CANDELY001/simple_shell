@@ -17,7 +17,7 @@ int handle_multi_cmds_Helper(char **arr)
 	{
 		exec_alias(arr);
 		return (1);
-	} else if (_strcmp(cmd, "./hsh") == 0)
+	} else if (_strcmp(cmd, "simple_shell") == 0)
 	{
 		char *filename = arr[1];
 
